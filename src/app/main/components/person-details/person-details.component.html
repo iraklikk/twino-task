@@ -1,1 +1,26 @@
-<p>person-details works!</p>
+<section class="person-details">
+  <div class="person-details__back">
+    <span>
+    <img src="assets/icons/back.svg" alt="">
+    Back
+    </span>
+  </div>
+  <div class="person-details__card">
+    <div>
+      <div class="image-wrapper">
+        <img
+          [ngClass]="{'uploaded-image': true}"
+          src="assets/icons/mirasha.jpg" alt="">
+      </div>
+      <h1>Giorgi Mirashvili</h1>
+    </div>
+    <div>
+      <p>SCORE</p>
+      <span>123456789</span>
+    </div>
+    <div>
+      <p>INCOME</p>
+      <span>5 394 EUR</span>
+    </div>
+  </div>
+</section>

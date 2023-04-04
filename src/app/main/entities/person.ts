@@ -1,7 +1,8 @@
 export interface Person {
+  id: number;
   firstName: string;
   lastName: string;
   income: number;
-  incomeCurrency: string;
+  score: number;
   image: string;
 }

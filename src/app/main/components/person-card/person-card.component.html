@@ -1,0 +1,13 @@
+<div class="card">
+  <div class="card__image">
+    <img
+      [ngClass]="{'uploaded-image' : person.image}"
+      [src]="person.image" alt="">
+  </div>
+  <div class="card__info">
+    <h2>{{person.firstName}} {{person.lastName}}</h2>
+    <p>SCORE</p>
+    <p>{{person.score}}</p>
+    <button>OPEN</button>
+  </div>
+</div>

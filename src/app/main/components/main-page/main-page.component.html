@@ -2,7 +2,9 @@
 <twn-person-form></twn-person-form>
 <div class="filter-container">
   <div class="filter-container__left">
-    <twn-weather></twn-weather>
+    <div class="weather-wrapper">
+      <twn-weather></twn-weather>
+    </div>
     <label>
       <input type="text">
       <img src="assets/icons/search.svg" alt="">
@@ -16,4 +18,13 @@
       <option value="income">Income</option>
     </select>
   </div>
+</div>
+<div class="card-container">
+  <div class="card-wrapper" *ngIf="persons$ | async as persons; else noPersons">
+    <twn-person-card
+      [person]="person"
+      *ngFor="let person of persons"
+    ></twn-person-card>
+  </div>
+  <ng-template #noPersons></ng-template>
 </div>

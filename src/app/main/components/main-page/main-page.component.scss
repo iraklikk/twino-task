@@ -12,9 +12,13 @@
     gap: 15px;
     flex-basis: 39.5%;
 
+    .weather-wrapper {
+      flex: 1;
+    }
+
     label {
       position: relative;
-      flex: 1;
+      flex: 2;
 
       input {
         width: 100%;
@@ -34,25 +38,34 @@
     flex-basis: 25%;
     select {
       padding: 11px;
-      width: 360px;
+      width: 100%;
     }
   }
 
-  //@include mixins.responsive(variables.$large) {
-  //  &__left,
-  //  &__right {
-  //    label input, select {
-  //      width: 300px;
-  //    }
-  //  }
-  //}
 
-  //@include mixins.responsive(variables.$medium) {
-  //  &__left,
-  //  &__right {
-  //    label input, select {
-  //      width: 300px;
-  //    }
-  //  }
-  //}
+  @include mixins.responsive(variables.$medium) {
+    &__left {
+      flex-basis: 50%;
+    }
+    &__right {
+      flex-basis: 32.5%;
+    }
+  }
+
+  @include mixins.responsive(variables.$small) {
+    flex-direction: column;
+    gap: 15px;
+  }
+}
+
+.card-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+
+  .card-wrapper {
+    display: grid;
+    grid-template-columns: repeat(3, 342px);
+    gap: 15px;
+  }
 }

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {FormBuilder, Validators} from "@angular/forms";
 
 @Component({
   selector: 'twn-person-form',
@@ -7,4 +8,12 @@ import { Component } from '@angular/core';
 })
 export class PersonFormComponent {
 
+  form = this.fb.group({
+    firstName: ['', Validators.required],
+    lastName: ['', Validators.required],
+    income: ['', Validators.required],
+  });
+
+  constructor(private fb: FormBuilder) {
+  }
 }
