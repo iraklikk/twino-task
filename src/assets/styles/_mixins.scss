@@ -1,5 +1,5 @@
 
-@mixin button {
+@mixin button($color, $background-color, $border-color, $padding) {
   cursor: pointer;
   transition: 0.2s;
   border-radius: 5px;
@@ -7,7 +7,28 @@
   align-items: center;
   justify-content: space-between;
   font-size: 16px;
-  border: 1px solid;
   gap: 10px;
-  @content;
+  color: $color;
+  background-color: $background-color;
+  border: 1px solid $border-color;
+  padding: $padding;
+
+  img {
+    transition: 0.2s;
+  }
+
+  &:hover {
+    color: $background-color;
+    background-color: $color;
+
+    &>img {
+      filter: brightness(0) invert(1);
+    }
+  }
+}
+
+@mixin responsive($size) {
+  @media screen and (max-width: $size) {
+    @content;
+  }
 }

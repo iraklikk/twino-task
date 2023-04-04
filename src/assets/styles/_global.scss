@@ -1,0 +1,28 @@
+@use 'variables';
+
+input[type='text'],
+input[type='number'] {
+  border: 1px solid variables.$grey;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 16px;
+
+  &::placeholder {
+    color: variables.$grey;
+    font-size: 16px;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}

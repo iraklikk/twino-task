@@ -1,6 +1,7 @@
 @use '../../../../assets/styles/mixins';
+@use '../../../../assets/styles/variables';
 
-.add-edit {
+.container {
   width: 100%;
   padding: 15px;
   background: #FFFFFF;
@@ -11,13 +12,12 @@
 
   button {
 
-
     &:nth-child(1) {
-
+      @include mixins.button(variables.$orange, variables.$white, variables.$orange, 7px 15px 7px 10px);
     }
 
     &:nth-child(2) {
-
+      @include mixins.button(variables.$white, variables.$orange, variables.$orange, 7px 40px);
     }
   }
 }
