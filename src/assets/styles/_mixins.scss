@@ -1,0 +1,13 @@
+
+@mixin button {
+  cursor: pointer;
+  transition: 0.2s;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 16px;
+  border: 1px solid;
+  gap: 10px;
+  @content;
+}
