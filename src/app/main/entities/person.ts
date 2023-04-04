@@ -2,7 +2,7 @@ export interface Person {
   id: number;
   firstName: string;
   lastName: string;
-  income: number;
+  income: string;
   score: number;
-  image: string;
+  imageSource: string;
 }

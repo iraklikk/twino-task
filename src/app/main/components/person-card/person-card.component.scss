@@ -38,11 +38,26 @@
       margin-bottom: 10px;
     }
 
-    button {
-      @include mixins.button(variables.$white, variables.$green, variables.$green, 10px 26px);
-      font-weight: 700;
-      letter-spacing: 4px;
-      margin-top: 24px;
+    .button-container {
+      display: flex;
+      gap: 10px;
+      button {
+        &:nth-child(1) {
+          @include mixins.button(variables.$white, variables.$green, variables.$green, 10px 26px);
+          font-weight: 700;
+          letter-spacing: 4px;
+          margin-top: 24px;
+        }
+
+        &:nth-child(2) {
+          @include mixins.button(variables.$white, variables.$blue, variables.$blue, 10px 26px);
+          font-weight: 700;
+          letter-spacing: 4px;
+          margin-top: 24px;
+        }
+      }
     }
-  }
+    }
+
+
 }

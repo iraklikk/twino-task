@@ -4,5 +4,10 @@
 <!--  height="216"-->
 <!--  [src]="src || 'default.png'"-->
 <!--  alt="">-->
-<twn-main-page></twn-main-page>
+<router-outlet></router-outlet>
 <!--<twn-person-details></twn-person-details>-->
+<twn-toaster
+  *ngIf="toasterInfo?.isOpen"
+  [toasterInfo]="toasterInfo"
+  (closeToaster)="toasterInfo.isOpen = false"
+></twn-toaster>

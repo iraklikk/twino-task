@@ -1,0 +1,13 @@
+<div class="toaster"
+  [ngClass]="{'toaster__close' : isClosing,
+              'toaster__warning' : toasterInfo.status === 'warning'
+    }"
+>
+  <div
+    class="toaster__message">
+    <span>{{toasterInfo.message}}</span>
+    <img
+      (click)="close()"
+      src="assets/icons/clear.svg" alt="">
+  </div>
+</div>

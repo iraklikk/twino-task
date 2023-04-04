@@ -1,0 +1,44 @@
+@use '../../../../assets/styles/variables';
+
+.toaster {
+  position: fixed;
+  right: 10px;
+  top: 10px;
+
+  &__message {
+    box-shadow: 0 0 10px 1px black;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    background-color: variables.$green;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    transform: translateX(0);
+    animation: 1s message-animation linear forwards;
+
+    img {
+      cursor: pointer;
+    }
+  }
+
+  &__close {
+    animation: 1s message-animation linear forwards reverse;
+  }
+
+  &__warning {
+    .toaster__message {
+      background-color: red;
+    }
+  }
+}
+
+@keyframes message-animation {
+  from  {
+    transform: translateX(200%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}

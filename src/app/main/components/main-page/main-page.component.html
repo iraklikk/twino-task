@@ -1,4 +1,5 @@
-<twn-add-edit></twn-add-edit>
+<twn-add-edit
+></twn-add-edit>
 <twn-person-form></twn-person-form>
 <div class="filter-container">
   <div class="filter-container__left">
@@ -6,15 +7,17 @@
       <twn-weather></twn-weather>
     </div>
     <label>
-      <input type="text">
+      <input
+        [formControl]="nameFilter"
+        type="text" placeholder="Filter By Name">
       <img src="assets/icons/search.svg" alt="">
     </label>
   </div>
   <div class="filter-container__right">
-    <select>
-      <option value="">Sort By</option>
-      <option value="first-name">First Name</option>
-      <option value="first-name">Last Name</option>
+    <select [formControl]="select">
+      <option value="score">Sort By</option>
+      <option value="firstName">First Name</option>
+      <option value="lastName">Last Name</option>
       <option value="income">Income</option>
     </select>
   </div>

@@ -1,13 +1,21 @@
 <div class="card">
   <div class="card__image">
     <img
-      [ngClass]="{'uploaded-image' : person.image}"
-      [src]="person.image" alt="">
+      [ngClass]="{'uploaded-image' : person.imageSource}"
+      [src]="person.imageSource" alt="">
   </div>
   <div class="card__info">
-    <h2>{{person.firstName}} {{person.lastName}}</h2>
+    <h2>{{person.firstName | titlecase}} {{person.lastName | titlecase}}</h2>
     <p>SCORE</p>
     <p>{{person.score}}</p>
-    <button>OPEN</button>
-  </div>
+    <div class="button-container">
+      <button
+        [routerLink]="['/person', person.id]"
+      >OPEN</button>
+      <button
+        (click)="editPerson()"
+      >EDIT</button>
+    </div>
+    </div>
+
 </div>

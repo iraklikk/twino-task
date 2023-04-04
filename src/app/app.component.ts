@@ -1,29 +1,25 @@
-import { Component } from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
+import {ToasterService} from "./main/services/toastr.service";
+import {map, Observable, tap} from "rxjs";
+import {ToasterInfo} from "./main/entities/toasterInfo";
 
 @Component({
   selector: 'twn-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
+  toasterInfo!: ToasterInfo;
 
-  // src = '';
-  //
-  // onFileChange(event: Event) {
-  //   const files = (event.target as HTMLInputElement).files;
-  //   if (files) {
-  //     const file = files[0];
-  //     const reader = new FileReader();
-  //
-  //     reader.onload = () => {
-  //       this.src = reader.result as string;
-  //     }
-  //
-  //     if (file) {
-  //       reader.readAsDataURL(file);
-  //     }
-  //   }
-  // }
+  constructor(private toasterService: ToasterService) {
+  }
 
-
+  ngOnInit() {
+    this.toasterService.toasterDetails$.pipe(
+      tap(res => {
+        this.toasterInfo = res
+      })
+    ).subscribe();
+  }
 }

@@ -7,6 +7,8 @@ import { AddEditComponent } from './components/add-edit/add-edit.component';
 import { WeatherComponent } from './components/weather/weather.component';
 import { PersonCardComponent } from './components/person-card/person-card.component';
 import {ReactiveFormsModule} from "@angular/forms";
+import { ToasterComponent } from './components/toaster/toaster.component';
+import {RouterLink} from "@angular/router";
 
 
 @NgModule({
@@ -17,14 +19,17 @@ import {ReactiveFormsModule} from "@angular/forms";
     AddEditComponent,
     WeatherComponent,
     PersonCardComponent,
+    ToasterComponent,
   ],
   imports: [
     CommonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterLink
   ],
   exports: [
     MainPageComponent,
-    PersonDetailsComponent
+    PersonDetailsComponent,
+    ToasterComponent
   ]
 })
 export class MainModule { }
