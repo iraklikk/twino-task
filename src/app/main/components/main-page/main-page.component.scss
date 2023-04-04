@@ -1,0 +1,58 @@
+@use '../../../../assets/styles/mixins';
+@use '../../../../assets/styles/variables';
+
+.filter-container {
+  padding: 15px;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+
+  &__left {
+    display: flex;
+    gap: 15px;
+    flex-basis: 39.5%;
+
+    label {
+      position: relative;
+      flex: 1;
+
+      input {
+        width: 100%;
+      }
+
+      img {
+        position: absolute;
+        right: 14px;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+    }
+
+  }
+
+  &__right {
+    flex-basis: 25%;
+    select {
+      padding: 11px;
+      width: 360px;
+    }
+  }
+
+  //@include mixins.responsive(variables.$large) {
+  //  &__left,
+  //  &__right {
+  //    label input, select {
+  //      width: 300px;
+  //    }
+  //  }
+  //}
+
+  //@include mixins.responsive(variables.$medium) {
+  //  &__left,
+  //  &__right {
+  //    label input, select {
+  //      width: 300px;
+  //    }
+  //  }
+  //}
+}

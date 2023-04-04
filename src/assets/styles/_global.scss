@@ -1,10 +1,11 @@
 @use 'variables';
 
 input[type='text'],
-input[type='number'] {
+input[type='number'],
+select {
   border: 1px solid variables.$grey;
   border-radius: 5px;
-  padding: 10px;
+  padding: 12px;
   font-size: 16px;
 
   &::placeholder {

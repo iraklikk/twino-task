@@ -1,0 +1,8 @@
+@use '../../../../assets/styles/variables';
+
+.weather {
+  min-width: 182px;
+  height: 45px;
+  border: 1px solid variables.$grey;
+  border-radius: 5px;
+}

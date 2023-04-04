@@ -1,9 +1,19 @@
 <twn-add-edit></twn-add-edit>
 <twn-person-form></twn-person-form>
 <div class="filter-container">
-  <twn-weather></twn-weather>
-  <label>
-    <input type="text">
-    <img src="assets/icons/search.svg" alt="">
-  </label>
+  <div class="filter-container__left">
+    <twn-weather></twn-weather>
+    <label>
+      <input type="text">
+      <img src="assets/icons/search.svg" alt="">
+    </label>
+  </div>
+  <div class="filter-container__right">
+    <select>
+      <option value="">Sort By</option>
+      <option value="first-name">First Name</option>
+      <option value="first-name">Last Name</option>
+      <option value="income">Income</option>
+    </select>
+  </div>
 </div>
