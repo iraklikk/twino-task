@@ -58,8 +58,7 @@ export class MainPageComponent implements OnInit, AfterViewInit {
     )
     this.showForm$ = this.personsService.openEdit$.asObservable().pipe(
       untilDestroyed(this),
-      map(res => res > -1),
-      tap(res => console.log(res))
+      map(res => res > -1)
     );
   }
 

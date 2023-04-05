@@ -26,12 +26,11 @@
     </div>
   </div>
   <div class="card-container">
-    <div class="card-wrapper" *ngIf="persons$ | async as persons; else noPersons">
+    <div class="card-wrapper" *ngIf="persons$ | async as persons">
       <twn-person-card
         [person]="person"
         *ngFor="let person of persons"
       ></twn-person-card>
     </div>
-    <ng-template #noPersons></ng-template>
   </div>
 </section>

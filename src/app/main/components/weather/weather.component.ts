@@ -1,6 +1,6 @@
-import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {WeatherService} from "../../services/weather.service";
-import {Observable, tap} from "rxjs";
+import {Observable} from "rxjs";
 import {Weather} from "../../entities/weather";
 import {UntilDestroy} from "@ngneat/until-destroy";
 
@@ -12,31 +12,13 @@ import {UntilDestroy} from "@ngneat/until-destroy";
 })
 export class WeatherComponent implements OnInit {
 
-  weather!: Weather;
-  errorMessage!: string;
-  imageSource!: string;
-  description!: string;
+  weather$!: Observable<Weather>;
 
-  constructor(private weatherService: WeatherService,
-              private cdr: ChangeDetectorRef) {
+  constructor(private weatherService: WeatherService) {
   }
 
   ngOnInit() {
-    this.weatherService.weather.asObservable().pipe(
-      tap(res => {
-        if (typeof res === 'string') {
-          this.errorMessage = res;
-        } else {
-          console.log(res);
-          const w = res.current.weather[0];
-          if (w) {
-            this.description = w.description;
-            this.imageSource = `https://openweathermap.org/img/wn/${w.icon}.png`;
-          }
-          this.weather = res;
-        }
-        this.cdr.detectChanges();
-      })).subscribe();
+    this.weather$ = this.weatherService.weather$;
   }
 
 }
