@@ -1,10 +1,14 @@
 @use '../../../../assets/styles/variables';
 @use '../../../../assets/styles/mixins';
 
+h1 {
+  padding: 30px 0 0 15px;
+}
+
 .person-form {
   width: 100%;
   display: flex;
-  padding: 30px 15px;
+  padding: 15px 15px 30px;
   gap: 15px;
   position: relative;
   border-bottom: 1px solid variables.$grey;

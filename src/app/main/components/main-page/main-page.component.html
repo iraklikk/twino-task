@@ -2,6 +2,7 @@
   <twn-add-edit
   ></twn-add-edit>
   <twn-person-form
+    *ngIf="showForm$ | async"
   ></twn-person-form>
   <div class="filter-container">
     <div class="filter-container__left">

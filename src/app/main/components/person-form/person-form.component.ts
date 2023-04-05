@@ -18,6 +18,7 @@ export class PersonFormComponent implements OnInit {
   isValid = true;
   isEditOpen = false;
   selectedId!: number;
+  headerText!: string;
 
   form = this.fb.group({
     firstName: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]+$/)]],
@@ -36,35 +37,28 @@ export class PersonFormComponent implements OnInit {
     this.personsService.openEdit$.asObservable().pipe(
       untilDestroyed(this),
       tap(res => {
-          const selectedPerson = this.personsService.persons.find(person => person.id === res);
-          if (selectedPerson) {
-            this.isEditOpen = true;
-            this.selectedId = selectedPerson.id;
-            this.form.setValue({
-              firstName: selectedPerson.firstName,
-              lastName: selectedPerson.lastName,
-              income: selectedPerson.income,
-              imageSource: selectedPerson.imageSource
-            })
-            // this.toasterService.toasterDetails$.next({
-            //   isOpen: true,
-            //   message: `Editing ${selectedPerson.firstName} ${selectedPerson.lastName}`,
-            //   status : 'warning'
-            // })
-          } else if (res === -1) {
-            this.isEditOpen = false;
-            // this.toasterService.toasterDetails$.next({
-            //   isOpen: true,
-            //   message: `Editing Canceled`,
-            //   status : 'warning'
-            // })
-            this.form.setValue({
-              firstName: '',
-              lastName: '',
-              income: '',
-              imageSource: ''
-            })
-          }
+        const selectedPerson = this.personsService.persons.find(person => person.id === res);
+        if (selectedPerson) {
+          this.headerText = `Edit ${selectedPerson.firstName} ${selectedPerson.lastName}`;
+          this.isEditOpen = true;
+          this.selectedId = selectedPerson.id;
+          this.form.setValue({
+            firstName: selectedPerson.firstName,
+            lastName: selectedPerson.lastName,
+            income: selectedPerson.income,
+            imageSource: selectedPerson.imageSource
+          })
+        } else {
+          this.headerText = 'Add New Person';
+          this.isEditOpen = false;
+          this.form.setValue({
+            firstName: '',
+            lastName: '',
+            income: '',
+            imageSource: ''
+          })
+        }
+      this.cdr.detectChanges();
       })
     ).subscribe();
     this.personsService.saveUser$.pipe(
@@ -169,5 +163,9 @@ export class PersonFormComponent implements OnInit {
     }, 0);
 
     return letterValues + +score;
+  }
+
+  closeForm() {
+    this.personsService.openEdit$.next(-1);
   }
 }

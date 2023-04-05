@@ -1,28 +1,35 @@
-<form
-  class="person-form" [formGroup]="form">
-  <input
-    [ngClass]="{'invalid' : form.get('firstName')?.invalid && !isValid}"
-    formControlName="firstName"
-    type="text"
-    placeholder="First Name">
-  <input
-    [ngClass]="{'invalid' : form.get('lastName')?.invalid && !isValid}"
-    formControlName="lastName"
-    type="text"
-    placeholder="Last Name">
-  <label class="income-label">
+<div class="container">
+  <h1>{{headerText}}</h1>
+  <form
+    class="person-form" [formGroup]="form">
     <input
-      [ngClass]="{'invalid' : form.get('income')?.invalid && !isValid}"
-      formControlName="income"
-      type="number"
-      placeholder="Income">
-  <span>EUR</span>
-  </label>
-  <label class="file-label">
+      [ngClass]="{'invalid' : form.get('firstName')?.invalid && !isValid}"
+      formControlName="firstName"
+      type="text"
+      placeholder="First Name">
     <input
-      (change)="onFileChange($event)"
-      type="file">
-    File Upload
-  </label>
-  <button>Cancel</button>
-</form>
+      [ngClass]="{'invalid' : form.get('lastName')?.invalid && !isValid}"
+      formControlName="lastName"
+      type="text"
+      placeholder="Last Name">
+    <label class="income-label">
+      <input
+        [ngClass]="{'invalid' : form.get('income')?.invalid && !isValid}"
+        formControlName="income"
+        type="number"
+        placeholder="Income">
+      <span>EUR</span>
+    </label>
+    <label class="file-label">
+      <input
+        (change)="onFileChange($event)"
+        type="file">
+      File Upload
+    </label>
+    <button
+      (click)="closeForm()"
+    >Cancel</button>
+  </form>
+</div>
+
+

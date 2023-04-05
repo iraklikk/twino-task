@@ -7,7 +7,7 @@ import {
   ViewChildren
 } from '@angular/core';
 import { PersonsService } from "../../services/persons.service";
-import { BehaviorSubject, combineLatest, map, Observable, startWith, tap } from "rxjs";
+import { combineLatest, map, Observable, startWith, tap } from "rxjs";
 import { Person } from "../../entities/person";
 import { FormControl } from "@angular/forms";
 import { PersonCardComponent } from "../person-card/person-card.component";
@@ -28,7 +28,6 @@ export class MainPageComponent implements OnInit, AfterViewInit {
   persons$!: Observable<Person[]>;
   showForm$!: Observable<boolean>;
 
-  sortOption$ = new BehaviorSubject<'score' | 'firstName' | 'lastName' | 'income'>('score');
 
   select = new FormControl('score');
   nameFilter = new FormControl('');
