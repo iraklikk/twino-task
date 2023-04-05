@@ -1,6 +1,6 @@
 
 export interface Weather {
-  current: {
+  current?: {
     temp : number;
     weather: [
       {
@@ -11,5 +11,5 @@ export interface Weather {
       }
     ]
   };
-  timezone : string;
+  errorMessage?: string;
 }

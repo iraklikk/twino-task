@@ -19,9 +19,12 @@ export class WeatherService {
   }
 
   getLocation() {
-    navigator.geolocation.getCurrentPosition(position => this.getWeather(position));
+    navigator.geolocation.getCurrentPosition(position => this.getWeather(position), () => this.setErrorMessage());
   }
 
+  setErrorMessage() {
+    this.weather$.next({errorMessage: "Location Denied"});
+  }
 
   getWeather(position: GeolocationPosition) {
     const lat = position.coords.latitude;
