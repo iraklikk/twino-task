@@ -33,6 +33,7 @@ export class PersonFormComponent implements OnInit {
   ngOnInit() {
     this.personsService.openEdit$.asObservable().pipe(
       tap(res => {
+          console.log(res);
           const selectedPerson = this.personsService.persons.find(person => person.id === res);
           if (selectedPerson) {
             this.isEditOpen = true;
