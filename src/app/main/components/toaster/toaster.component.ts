@@ -10,7 +10,9 @@ import {
 import {switchMap, tap, timer} from "rxjs";
 import {ToasterService} from "../../services/toastr.service";
 import {ToasterInfo} from "../../entities/toasterInfo";
+import {UntilDestroy, untilDestroyed} from "@ngneat/until-destroy";
 
+@UntilDestroy()
 @Component({
   selector: 'twn-toaster',
   templateUrl: './toaster.component.html',
@@ -29,6 +31,7 @@ export class ToasterComponent implements OnInit {
 
   ngOnInit() {
     timer(3500).pipe(
+      untilDestroyed(this),
       tap(res => {
         this.isClosing = true;
         this.cdr.detectChanges();
@@ -41,6 +44,7 @@ export class ToasterComponent implements OnInit {
   close() {
     this.isClosing = true;
     timer(500).pipe(
+      untilDestroyed(this),
       tap(() => this.closeToaster.emit())
     ).subscribe();
   }
