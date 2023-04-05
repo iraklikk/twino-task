@@ -31,7 +31,6 @@ export class MainPageComponent implements OnInit {
         startWith('')
       )
     ]).pipe(
-      tap(res => console.log(res)),
       map(([persons, sortType, fullName]) => {
         if (sortType === 'score' || sortType === 'income') {
           persons = persons.sort((a,b) => +a[sortType] - +b[sortType]);

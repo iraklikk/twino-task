@@ -24,7 +24,7 @@ export class AddEditComponent implements OnInit {
   }
 
   closeEdit() {
-    this.personsService.openEdit$.next(0);
+    this.personsService.openEdit$.next(-1);
   }
 
 }

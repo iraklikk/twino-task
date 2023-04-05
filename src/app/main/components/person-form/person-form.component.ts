@@ -4,7 +4,9 @@ import { PersonsService } from "../../services/persons.service";
 import { tap } from "rxjs";
 import { Person } from "../../entities/person";
 import { ToasterService } from "../../services/toastr.service";
+import {UntilDestroy, untilDestroyed} from "@ngneat/until-destroy";
 
+@UntilDestroy()
 @Component({
   selector: 'twn-person-form',
   templateUrl: './person-form.component.html',
@@ -32,8 +34,8 @@ export class PersonFormComponent implements OnInit {
 
   ngOnInit() {
     this.personsService.openEdit$.asObservable().pipe(
+      untilDestroyed(this),
       tap(res => {
-          console.log(res);
           const selectedPerson = this.personsService.persons.find(person => person.id === res);
           if (selectedPerson) {
             this.isEditOpen = true;
@@ -49,17 +51,24 @@ export class PersonFormComponent implements OnInit {
               message: `Editing ${selectedPerson.firstName} ${selectedPerson.lastName}`,
               status : 'warning'
             })
-          } else {
+          } else if (res === -1) {
             this.isEditOpen = false;
             this.toasterService.toasterDetails$.next({
               isOpen: true,
               message: `Editing Canceled`,
               status : 'warning'
             })
+            this.form.setValue({
+              firstName: '',
+              lastName: '',
+              income: '',
+              imageSource: ''
+            })
           }
       })
     ).subscribe();
     this.personsService.saveUser$.pipe(
+      untilDestroyed(this),
       tap(res => {
         if (this.form.valid) {
           if (this.isEditOpen) {
