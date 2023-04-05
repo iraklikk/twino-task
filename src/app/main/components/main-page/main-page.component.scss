@@ -52,7 +52,7 @@
     }
   }
 
-  @include mixins.responsive(variables.$small) {
+  @include mixins.responsive(variables.$extra-small) {
     flex-direction: column;
     gap: 15px;
   }
@@ -67,5 +67,17 @@
     display: grid;
     grid-template-columns: repeat(3, 342px);
     gap: 15px;
+
+    @include mixins.responsive(variables.$large) {
+      grid-template-columns: repeat(2, 342px);
+    }
+
+    @include mixins.responsive(variables.$small) {
+      grid-template-columns: repeat(1, 342px);
+    }
+
+    @include mixins.responsive(variables.$extra-small) {
+      grid-template-columns: repeat(1, 274px);
+    }
   }
 }
