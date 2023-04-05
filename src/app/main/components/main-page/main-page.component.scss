@@ -42,19 +42,51 @@
     }
   }
 
+  @include mixins.responsive(variables.$large) {
+    &__left {
+
+      .weather-wrapper {
+        flex: 2;
+      }
+    }
+  }
+
 
   @include mixins.responsive(variables.$medium) {
     &__left {
-      flex-basis: 50%;
+      flex-basis: 60%;
+
+      .weather-wrapper {
+        flex: 2;
+      }
     }
     &__right {
       flex-basis: 32.5%;
     }
   }
 
+  @include mixins.responsive(variables.$small) {
+    flex-direction: column;
+    gap: 15px;
+
+    &__right {
+      display: flex;
+      justify-content: center;
+      select {
+        width: 50%;
+      }
+    }
+  }
+
   @include mixins.responsive(variables.$extra-small) {
     flex-direction: column;
     gap: 15px;
+    &__right {
+      justify-content: flex-start;
+      select {
+        width: 100%;
+      }
+    }
   }
 }
 

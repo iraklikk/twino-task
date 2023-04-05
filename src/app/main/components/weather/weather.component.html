@@ -1,2 +1,10 @@
-<div class="weather">
+
+<div class="weather"
+>
+  <p *ngIf="errorMessage;else weatherTemplate">{{errorMessage}}</p>
+  <ng-template #weatherTemplate>
+    <img [src]="imageSource" alt="">
+    <p>{{description}}</p>
+    <p>{{weather?.current?.temp | number: '1.0-0'}}</p>
+  </ng-template>
 </div>
