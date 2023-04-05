@@ -6,7 +6,7 @@
     <ng-container *ngIf="weather.current; else noWeather">
       <img [src]="'https://openweathermap.org/img/wn/' + weather.current.weather[0].icon + '.png'" alt="">
       <p>{{weather.current.weather[0].description}}</p>
-      <p>{{weather.current.temp}}</p>
+      <p>{{weather.current.temp | number: '1.0-0'}}</p>
     </ng-container>
     <ng-template #noWeather>
       <p>{{weather?.errorMessage}}</p>
