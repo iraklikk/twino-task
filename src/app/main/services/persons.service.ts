@@ -7,11 +7,36 @@ import { BehaviorSubject, Subject } from "rxjs";
 })
 export class PersonsService {
 
-  persons: Person[] = [];
+  persons: Person[] = [
+    {
+      firstName : "Meri",
+      id: 1,
+      imageSource :    "assets/icons/meri.jpg",
+      income : "3333",
+      lastName : "Robitashvili",
+      score : 1000
+    },
+    {
+      firstName : "Giorgi",
+      id: 2,
+      imageSource :    "assets/icons/meri.jpg",
+      income : "3333",
+      lastName : "Mirashvili",
+      score : 1000
+    },
+    {
+      firstName : "Irakli",
+      id: 3,
+      imageSource : "",
+      income : "3333",
+      lastName : "Kvaratskhelia",
+      score : 1000
+    }
+  ];
 
   saveUser$ = new Subject<boolean>();
   persons$ = new BehaviorSubject<Person[]>(this.persons);
-  nextId = this.persons.length + 1;
+  nextId: number;
   openEdit$ = new BehaviorSubject<number>(0);
 
   addPerson(person: Person) {
@@ -23,7 +48,6 @@ export class PersonsService {
   editPerson(editedPerson: Person) {
       this.persons = this.persons.map(person => {
         if (person.id === editedPerson.id) {
-          console.log(editedPerson);
           return editedPerson;
         }
         return person;
@@ -33,26 +57,11 @@ export class PersonsService {
   }
 
   constructor() {
-    this.persons = JSON.parse(localStorage.getItem('persons') || '[]');
+    if (localStorage.getItem('persons')) {
+      this.persons = JSON.parse(localStorage.getItem('persons') || '[]');
+    }
+    localStorage.setItem('persons', JSON.stringify(this.persons));
     this.persons$.next(this.persons);
-    console.log(JSON.parse(localStorage.getItem('persons') || '[]'));
-    // firstName
-    //   :
-    //   "a"
-    // id
-    //   :
-    //   1
-    // imageSource
-    //   :
-    //   "assets/icons/meri.jpg"
-    // income
-    //   :
-    //   "3333"
-    // lastName
-    //   :
-    //   "Robitashvili"
-    // score
-    //   :
-    //   1000
+    this.nextId = this.persons.length + 1;
   }
 }

@@ -2,7 +2,7 @@
   <div class="card__image">
     <img
       [ngClass]="{'uploaded-image' : person.imageSource}"
-      [src]="person.imageSource" alt="">
+      [src]="person.imageSource || 'assets/icons/person_default.png'" alt="">
   </div>
   <div class="card__info">
     <h2>{{person.firstName | titlecase}} {{person.lastName | titlecase}}</h2>

@@ -11,8 +11,8 @@
     <div>
       <div class="image-wrapper">
         <img
-          [ngClass]="{'uploaded-image': true}"
-          [src]="person?.imageSource" alt="">
+          [ngClass]="{'uploaded-image': person?.imageSource}"
+          [src]="person?.imageSource || 'assets/icons/person_default.png'" alt="">
       </div>
       <h1>{{person?.firstName | titlecase}} {{person?.lastName | titlecase}}</h1>
     </div>

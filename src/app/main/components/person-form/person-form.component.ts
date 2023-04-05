@@ -145,7 +145,7 @@ export class PersonFormComponent implements OnInit {
       firstName: this.form.get('firstName')?.value || '',
       lastName: this.form.get('lastName')?.value || '',
       income: this.form.get('income')?.value  || '',
-      imageSource: this.form.get('imageSource')?.value || 'assets/icons/person_default.png',
+      imageSource: this.form.get('imageSource')?.value || '',
       score: 0,
       id: 0
     };
