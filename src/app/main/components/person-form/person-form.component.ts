@@ -1,9 +1,9 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
-import {FormBuilder, FormControl, Validators} from "@angular/forms";
-import {PersonsService} from "../../services/persons.service";
-import {tap} from "rxjs";
-import {Person} from "../../entities/person";
-import {ToasterService} from "../../services/toastr.service";
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, Validators } from "@angular/forms";
+import { PersonsService } from "../../services/persons.service";
+import { tap } from "rxjs";
+import { Person } from "../../entities/person";
+import { ToasterService } from "../../services/toastr.service";
 
 @Component({
   selector: 'twn-person-form',
@@ -14,7 +14,8 @@ import {ToasterService} from "../../services/toastr.service";
 export class PersonFormComponent implements OnInit {
 
   isValid = true;
-
+  isEditOpen = false;
+  selectedId!: number;
 
   form = this.fb.group({
     firstName: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]+$/)]],
@@ -30,16 +31,49 @@ export class PersonFormComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.personsService.openEdit$.asObservable().pipe(
+      tap(res => {
+          const selectedPerson = this.personsService.persons.find(person => person.id === res);
+          if (selectedPerson) {
+            this.isEditOpen = true;
+            this.selectedId = selectedPerson.id;
+            this.form.setValue({
+              firstName: selectedPerson.firstName,
+              lastName: selectedPerson.lastName,
+              income: selectedPerson.income,
+              imageSource: selectedPerson.imageSource
+            })
+            this.toasterService.toasterDetails$.next({
+              isOpen: true,
+              message: `Editing ${selectedPerson.firstName} ${selectedPerson.lastName}`,
+              status : 'warning'
+            })
+          } else {
+            this.isEditOpen = false;
+            this.toasterService.toasterDetails$.next({
+              isOpen: true,
+              message: `Editing Canceled`,
+              status : 'warning'
+            })
+          }
+      })
+    ).subscribe();
     this.personsService.saveUser$.pipe(
       tap(res => {
         if (this.form.valid) {
-          this.addPerson();
-          this.isValid = true;
-          this.toasterService.toasterDetails$.next({
-            isOpen: true,
-            message: 'User Added Successfully',
-            status: 'success'
-          });
+          if (this.isEditOpen) {
+            const person = this.generatePersonObject();
+            person.id = this.selectedId;
+            this.personsService.editPerson(person);
+          } else {
+            this.addPerson();
+            this.isValid = true;
+            this.toasterService.toasterDetails$.next({
+              isOpen: true,
+              message: 'User Added Successfully',
+              status: 'success'
+            });
+          }
           this.form.setValue({
             firstName: '',
             lastName: '',
@@ -51,7 +85,7 @@ export class PersonFormComponent implements OnInit {
           this.toasterService.toasterDetails$.next({
             isOpen: true,
             message,
-            status: 'warning'
+            status: 'danger'
           })
           this.isValid = false;
         }
@@ -100,17 +134,23 @@ export class PersonFormComponent implements OnInit {
   }
 
   addPerson() {
+    const person = this.generatePersonObject();
+    person.id = this.personsService.nextId;
+    this.personsService.addPerson(person);
+    this.personsService.nextId++;
+  }
+
+  generatePersonObject(): Person {
     const person: Person = {
       firstName: this.form.get('firstName')?.value || '',
       lastName: this.form.get('lastName')?.value || '',
       income: this.form.get('income')?.value  || '',
       imageSource: this.form.get('imageSource')?.value || 'assets/icons/person_default.png',
-      id: this.personsService.nextId,
-      score: 0
+      score: 0,
+      id: 0
     };
     person.score = this.calculateScore(person.firstName, person.income);
-    this.personsService.addPerson(person);
-    this.personsService.nextId++;
+    return person;
   }
 
   calculateScore(firstname: string, score: string) {

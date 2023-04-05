@@ -1,4 +1,5 @@
-<form class="person-form" [formGroup]="form">
+<form
+  class="person-form" [formGroup]="form">
   <input
     [ngClass]="{'invalid' : form.get('firstName')?.invalid && !isValid}"
     formControlName="firstName"

@@ -7,25 +7,7 @@ import { BehaviorSubject, Subject } from "rxjs";
 })
 export class PersonsService {
 
-
-  persons: Person[] = [
-    {
-      id: 1,
-      firstName: 'a',
-      lastName: 'Robitashvili',
-      income: '3333',
-      score: 1000,
-      imageSource: 'assets/icons/meri.jpg'
-    },
-    {
-      id: 2,
-      firstName: 'b',
-      lastName: 'Mirashvili',
-      income: '3334',
-      score: 500,
-      imageSource: 'assets/icons/mirasha.jpg'
-    },
-  ];
+  persons: Person[] = [];
 
   saveUser$ = new Subject<boolean>();
   persons$ = new BehaviorSubject<Person[]>(this.persons);
@@ -34,8 +16,43 @@ export class PersonsService {
 
   addPerson(person: Person) {
     this.persons.push(person);
+    localStorage.setItem('persons', JSON.stringify(this.persons));
     this.persons$.next(this.persons);
   }
 
-  constructor() { }
+  editPerson(editedPerson: Person) {
+      this.persons = this.persons.map(person => {
+        if (person.id === editedPerson.id) {
+          console.log(editedPerson);
+          return editedPerson;
+        }
+        return person;
+      });
+      localStorage.setItem('persons', JSON.stringify(this.persons));
+      this.persons$.next(this.persons);
+  }
+
+  constructor() {
+    this.persons = JSON.parse(localStorage.getItem('persons') || '[]');
+    this.persons$.next(this.persons);
+    console.log(JSON.parse(localStorage.getItem('persons') || '[]'));
+    // firstName
+    //   :
+    //   "a"
+    // id
+    //   :
+    //   1
+    // imageSource
+    //   :
+    //   "assets/icons/meri.jpg"
+    // income
+    //   :
+    //   "3333"
+    // lastName
+    //   :
+    //   "Robitashvili"
+    // score
+    //   :
+    //   1000
+  }
 }

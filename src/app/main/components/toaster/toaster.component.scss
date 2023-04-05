@@ -27,9 +27,15 @@
     animation: 1s message-animation linear forwards reverse;
   }
 
+  &__danger {
+    .toaster__message {
+      background-color: variables.$red;
+    }
+  }
+
   &__warning {
     .toaster__message {
-      background-color: red;
+      background-color: variables.$orange;
     }
   }
 }

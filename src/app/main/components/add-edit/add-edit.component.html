@@ -1,5 +1,7 @@
 <div class="container">
-  <button>
+  <button
+    (click)="closeEdit()"
+    [ngClass]="{'disabled' : !(isEditOpen$ | async)}">
     <img src="assets/icons/add.svg" alt="plus">
     Add New
   </button>

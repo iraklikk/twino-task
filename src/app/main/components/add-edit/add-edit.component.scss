@@ -19,5 +19,9 @@
     &:nth-child(2) {
       @include mixins.button(variables.$white, variables.$orange, variables.$orange, 7px 40px);
     }
+
+    &.disabled {
+      pointer-events: none;
+    }
   }
 }

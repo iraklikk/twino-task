@@ -1,6 +1,7 @@
 <div class="toaster"
   [ngClass]="{'toaster__close' : isClosing,
-              'toaster__warning' : toasterInfo.status === 'warning'
+              'toaster__warning' : toasterInfo.status === 'warning',
+              'toaster__danger' : toasterInfo.status === 'danger'
     }"
 >
   <div
