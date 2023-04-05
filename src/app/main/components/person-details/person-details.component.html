@@ -2,6 +2,7 @@
   <div class="person-details__back">
     <span
       [routerLink]="['/home']"
+      [queryParams]="{id: person?.id}"
     >
       <img src="assets/icons/back.svg" alt="">
       Back

@@ -1,8 +1,18 @@
-import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
-import {PersonsService} from "../../services/persons.service";
-import {BehaviorSubject, combineLatest, map, Observable, of, startWith, tap} from "rxjs";
-import {Person} from "../../entities/person";
-import {FormControl} from "@angular/forms";
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  OnInit,
+  QueryList, ViewChild,
+  ViewChildren
+} from '@angular/core';
+import { PersonsService } from "../../services/persons.service";
+import { BehaviorSubject, combineLatest, map, Observable, startWith } from "rxjs";
+import { Person } from "../../entities/person";
+import { FormControl } from "@angular/forms";
+import { PersonCardComponent } from "../person-card/person-card.component";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'twn-main-page',
@@ -10,7 +20,9 @@ import {FormControl} from "@angular/forms";
   styleUrls: ['./main-page.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class MainPageComponent implements OnInit {
+export class MainPageComponent implements OnInit, AfterViewInit {
+
+  @ViewChildren(PersonCardComponent) cards!: QueryList<PersonCardComponent>;
 
   persons$!: Observable<Person[]>;
 
@@ -19,7 +31,8 @@ export class MainPageComponent implements OnInit {
   select = new FormControl('score');
   nameFilter = new FormControl('');
 
-  constructor(private personsService: PersonsService) { }
+  constructor(private personsService: PersonsService,
+              private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.persons$ = combineLatest([
@@ -42,6 +55,13 @@ export class MainPageComponent implements OnInit {
         });
       }),
     )
+  }
+
+  ngAfterViewInit() {
+    const id = this.route.snapshot.queryParams['id'];
+    if (id) {
+      this.cards.get(id - 1)?.card.nativeElement.scrollIntoView({behavior: 'smooth'})
+    }
   }
 
 }
