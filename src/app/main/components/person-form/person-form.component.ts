@@ -46,18 +46,18 @@ export class PersonFormComponent implements OnInit {
               income: selectedPerson.income,
               imageSource: selectedPerson.imageSource
             })
-            this.toasterService.toasterDetails$.next({
-              isOpen: true,
-              message: `Editing ${selectedPerson.firstName} ${selectedPerson.lastName}`,
-              status : 'warning'
-            })
+            // this.toasterService.toasterDetails$.next({
+            //   isOpen: true,
+            //   message: `Editing ${selectedPerson.firstName} ${selectedPerson.lastName}`,
+            //   status : 'warning'
+            // })
           } else if (res === -1) {
             this.isEditOpen = false;
-            this.toasterService.toasterDetails$.next({
-              isOpen: true,
-              message: `Editing Canceled`,
-              status : 'warning'
-            })
+            // this.toasterService.toasterDetails$.next({
+            //   isOpen: true,
+            //   message: `Editing Canceled`,
+            //   status : 'warning'
+            // })
             this.form.setValue({
               firstName: '',
               lastName: '',

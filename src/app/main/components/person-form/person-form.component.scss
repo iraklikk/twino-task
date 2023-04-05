@@ -40,13 +40,20 @@
     justify-content: center;
   }
 
-  span {
-
+  button {
+    @include mixins.button(variables.$white, variables.$red, variables.$red, 12px);
+    flex: 2;
+    display: flex;
+    justify-content: center;
   }
 
   @include mixins.responsive(variables.$medium) {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
+
+
+    button {
+    }
   }
 
   @include mixins.responsive(variables.$extra-small) {

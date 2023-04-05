@@ -37,7 +37,7 @@ export class PersonsService {
   saveUser$ = new Subject<boolean>();
   persons$ = new BehaviorSubject<Person[]>(this.persons);
   nextId: number;
-  openEdit$ = new BehaviorSubject<number>(0);
+  openEdit$ = new BehaviorSubject<number>(-1);
 
   addPerson(person: Person) {
     this.persons.push(person);

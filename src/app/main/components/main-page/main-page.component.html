@@ -1,33 +1,36 @@
-<twn-add-edit
-></twn-add-edit>
-<twn-person-form></twn-person-form>
-<div class="filter-container">
-  <div class="filter-container__left">
-    <div class="weather-wrapper">
-      <twn-weather></twn-weather>
+<section>
+  <twn-add-edit
+  ></twn-add-edit>
+  <twn-person-form
+  ></twn-person-form>
+  <div class="filter-container">
+    <div class="filter-container__left">
+      <div class="weather-wrapper">
+        <twn-weather></twn-weather>
+      </div>
+      <label>
+        <input
+          [formControl]="nameFilter"
+          type="text" placeholder="Filter By Name">
+        <img src="assets/icons/search.svg" alt="">
+      </label>
     </div>
-    <label>
-      <input
-        [formControl]="nameFilter"
-        type="text" placeholder="Filter By Name">
-      <img src="assets/icons/search.svg" alt="">
-    </label>
+    <div class="filter-container__right">
+      <select [formControl]="select">
+        <option value="score">Sort By</option>
+        <option value="firstName">First Name</option>
+        <option value="lastName">Last Name</option>
+        <option value="income">Income</option>
+      </select>
+    </div>
   </div>
-  <div class="filter-container__right">
-    <select [formControl]="select">
-      <option value="score">Sort By</option>
-      <option value="firstName">First Name</option>
-      <option value="lastName">Last Name</option>
-      <option value="income">Income</option>
-    </select>
+  <div class="card-container">
+    <div class="card-wrapper" *ngIf="persons$ | async as persons; else noPersons">
+      <twn-person-card
+        [person]="person"
+        *ngFor="let person of persons"
+      ></twn-person-card>
+    </div>
+    <ng-template #noPersons></ng-template>
   </div>
-</div>
-<div class="card-container">
-  <div class="card-wrapper" *ngIf="persons$ | async as persons; else noPersons">
-    <twn-person-card
-      [person]="person"
-      *ngFor="let person of persons"
-    ></twn-person-card>
-  </div>
-  <ng-template #noPersons></ng-template>
-</div>
+</section>

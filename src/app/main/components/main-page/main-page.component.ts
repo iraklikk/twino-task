@@ -2,18 +2,19 @@ import {
   AfterViewInit,
   ChangeDetectionStrategy,
   Component,
-  ElementRef,
   OnInit,
-  QueryList, ViewChild,
+  QueryList,
   ViewChildren
 } from '@angular/core';
 import { PersonsService } from "../../services/persons.service";
-import { BehaviorSubject, combineLatest, map, Observable, startWith } from "rxjs";
+import { BehaviorSubject, combineLatest, map, Observable, startWith, tap } from "rxjs";
 import { Person } from "../../entities/person";
 import { FormControl } from "@angular/forms";
 import { PersonCardComponent } from "../person-card/person-card.component";
-import {ActivatedRoute} from "@angular/router";
+import { ActivatedRoute } from "@angular/router";
+import { UntilDestroy, untilDestroyed } from "@ngneat/until-destroy";
 
+@UntilDestroy()
 @Component({
   selector: 'twn-main-page',
   templateUrl: './main-page.component.html',
@@ -25,6 +26,7 @@ export class MainPageComponent implements OnInit, AfterViewInit {
   @ViewChildren(PersonCardComponent) cards!: QueryList<PersonCardComponent>;
 
   persons$!: Observable<Person[]>;
+  showForm$!: Observable<boolean>;
 
   sortOption$ = new BehaviorSubject<'score' | 'firstName' | 'lastName' | 'income'>('score');
 
@@ -55,6 +57,11 @@ export class MainPageComponent implements OnInit, AfterViewInit {
         });
       }),
     )
+    this.showForm$ = this.personsService.openEdit$.asObservable().pipe(
+      untilDestroyed(this),
+      map(res => res > -1),
+      tap(res => console.log(res))
+    );
   }
 
   ngAfterViewInit() {
